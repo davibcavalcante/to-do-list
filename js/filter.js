@@ -26,10 +26,14 @@ function filter() {
                 item.classList.add('hide')
             }
         })
+        if (inputSearch.value.length > 0) search()
+
     } else if (statusFilter == 'all') {
         tasksFilterDone.forEach((item) => {
             item.classList.remove('hide')
+            if (inputSearch.value.length > 0) search()
         })
+    
     } else if (statusFilter == 'to-do') {
         tasksFilterDone.forEach((item) => {
             item.classList.remove('hide')
@@ -37,5 +41,6 @@ function filter() {
                 item.classList.add('hide')
             }
         })
+        if (inputSearch.value.length > 0) search()
     }
 }

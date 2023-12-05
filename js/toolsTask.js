@@ -52,11 +52,10 @@ function removeTask(container, list) {
     itemRemove = container.querySelector('.text-task').innerText
     indexRemoveList = lists.findIndex((item) => item.name == list)
     indexRemoveItem = lists[indexRemoveList].item.findIndex((item) => item == itemRemove)
-
-    lists[indexRemoveList].item.pop(indexRemoveItem)
-    lists[indexRemoveList].hour.pop(indexRemoveItem)
-    lists[indexRemoveList].min.pop(indexRemoveItem)
-    lists[indexRemoveList].done.pop(indexRemoveItem)
+    lists[indexRemoveList].item.splice(indexRemoveItem, 1)
+    lists[indexRemoveList].hour.splice(indexRemoveItem, 1)
+    lists[indexRemoveList].min.splice(indexRemoveItem, 1)
+    lists[indexRemoveList].done.splice(indexRemoveItem, 1)
     localStorage.setItem('list', JSON.stringify(lists))
     container.remove()
 }
