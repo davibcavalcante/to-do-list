@@ -18,7 +18,7 @@
         <section class="container-edit hide">
             <label for="input-edit-task">Edit your task:</label>
             <section class="controls-edit">
-                <input type="text" id="input-edit-task">
+                <input type="text" id="input-edit-task" autocomplete="off">
                 <button id="edit-task-btn">&dArr;</button>
             </section>
             <button id="cancel-edit-btn">Cancel</button>
@@ -27,7 +27,7 @@
         <section class="container-edit-list hide">
             <label for="input-edit-list">Edit your list:</label>
             <section class="controls-edit-list">
-                <input type="text" id="input-edit-list">
+                <input type="text" id="input-edit-list" autocomplete="off">
                 <button id="confirm-edit-list-btn">&dArr;</button>
             </section>
             <p class="error-list-exist hide error">There is already a list with that name</p>
@@ -37,7 +37,7 @@
         <section class="container-add-list hide">
             <label for="input-add-list">Add your list:</label>
             <section class="controls-add-list">
-                <input type="text" id="input-add-list" placeholder="What will this list be directed to?">
+                <input type="text" id="input-add-list" placeholder="What will this list be directed to?" autocomplete="off">
                 <button id="confirm-add-list-btn">&dArr;</button>
             </section>
             <p class="error-name-exist hide error">This name already exists!</p>
@@ -49,10 +49,7 @@
             <section class="container-lists">
                 <label for="sel-lists">Choose your list:</label>
                 <select id="sel-lists">
-                    <!--
-                    <option value="lista-pessoal">Lista Pessoal</option>
-                    <option value="lista-profissional">Lista Profissional</option>
-                    -->
+
                 </select>
                 <section class="controls-list">
                     <button class="add-list-btn">&plus;</button>
