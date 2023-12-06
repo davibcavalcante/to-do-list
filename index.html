@@ -30,7 +30,7 @@
                 <input type="text" id="input-edit-list">
                 <button id="confirm-edit-list-btn">&dArr;</button>
             </section>
-            <p class="error-list-exist hide">There is already a list with that name</p>
+            <p class="error-list-exist hide error">There is already a list with that name</p>
             <button id="cancel-edit-list-btn">Cancel</button>
         </section>
 
@@ -40,7 +40,8 @@
                 <input type="text" id="input-add-list" placeholder="What will this list be directed to?">
                 <button id="confirm-add-list-btn">&dArr;</button>
             </section>
-            <p class="error-name-exist hide">This name already exists!</p>
+            <p class="error-name-exist hide error">This name already exists!</p>
+            <p class="error-name-empty hide error">You cannot add an empty name!</p>
             <button id="cancel-list-btn">Cancel</button>
         </section>
 
@@ -115,7 +116,8 @@
                         </select>
                     </section>
                 </section>
-                <p class="error-create-list hide">Create a list first</p>
+                <p class="error-create-list hide error">Create a list first</p>
+                <p class="error-name-task-exist hide error">A task with that name already exists</p>
             </section>
 
             <section class="container-search-filter">

@@ -1,4 +1,18 @@
+function callCreateTask(indexList) {
+    lists[indexList].done.push(false)
+    lists[indexList].item.push(inputAddTask.value)
+    lists[indexList].hour.push(selAddHour.value)
+    lists[indexList].min.push(selAddMin.value)
+    localStorage.setItem('list', JSON.stringify(lists))
+    createTask(lists[indexList])
+    selAddHour.value = '00'
+    selAddMin.value = '00'
+    inputAddTask.value = ''
+    inputAddTask.focus()
+}
+
 function createTask(list) {
+    console.log('Fui chamado')
     containerTasks.innerHTML = ''
     if (list.item.length > 0) {
         list.item.forEach((item, index) => {
@@ -22,6 +36,7 @@ function createTask(list) {
             containerTask.appendChild(paragraphTask)
             containerTask.appendChild(containerTaskSettings)
             containerTasks.appendChild(containerTask)
+            filter()
         })
     }
 }

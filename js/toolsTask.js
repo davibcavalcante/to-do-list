@@ -14,9 +14,11 @@ function doneTask(container, list) {
     if (lists[indexDone].done[indexTask]) {
         container.classList.add('done')
         localStorage.setItem('list', JSON.stringify(lists))
+        filter()
     } else {
         container.classList.remove('done')
         localStorage.setItem('list', JSON.stringify(lists))
+        filter()
     }
 }
 
@@ -43,6 +45,7 @@ function editTask(nameTask, list) {
         createTask(lists[indexListEdit])
         hideAndShowEdit()
         confirmEditButton.removeEventListener('click', confirmEdit)
+        filter()
     }
 
     cancelEditButton.addEventListener('click', hideAndShowEdit)

@@ -1,46 +1,60 @@
-function search() {
+function filter() {
     const tasksFilter = document.querySelectorAll('.task')
-    tasksFilter.forEach((item) => {
-        let nameTask = item.querySelector('.text-task').innerText
-        let nameTaskFormatted = nameTask.toLowerCase()
-        let textComp = inputSearch.value.toLowerCase()
-        let comp = nameTaskFormatted.substring(0, textComp.length)
-        if (textComp.length > 0) {
-            if (!(comp == textComp)) {
-                item.classList.add('hide')
-            }
+    if (selFilter.value ==='all') {
+        if (inputSearch.value.length > 0) {
+            tasksFilter.forEach((item) => {
+                search(item)
+            })
         } else {
-            filter()
+            tasksFilter.forEach(item => item.classList.remove('hide'))
         }
-    })
+    } else if (selFilter.value === 'done') {
+        if (inputSearch.value.length > 0) {
+            tasksFilter.forEach((item) => {
+                if (item.classList.contains('done')) {
+                    search(item)
+                } else {
+                    item.classList.add('hide')
+                }
+            })
+        } else {
+            tasksFilter.forEach((item) => {
+                if (item.classList.contains('done')) {
+                    item.classList.remove('hide')
+                } else {
+                    item.classList.add('hide')
+                }
+            })
+        }
+    } else if (selFilter.value === 'to-do') {
+        if (inputSearch.value.length > 0) {
+            tasksFilter.forEach((item) => {
+                if (!(item.classList.contains('done'))) {
+                    search(item)
+                } else {
+                    item.classList.add('hide')
+                }
+            })
+        } else {
+            tasksFilter.forEach((item) => {
+                if (item.classList.contains('done')) {
+                    item.classList.add('hide')
+                } else {
+                    item.classList.remove('hide')
+                }
+            })
+        }
+    }
 }
 
-function filter() {
-    const tasksFilterDone = document.querySelectorAll('.task')
-    const statusFilter = selFilter.value
-
-    if (statusFilter == 'done') {
-        tasksFilterDone.forEach((item) => {
-            item.classList.remove('hide')
-            if (!(item.classList.contains('done'))) {
-                item.classList.add('hide')
-            }
-        })
-        if (inputSearch.value.length > 0) search()
-
-    } else if (statusFilter == 'all') {
-        tasksFilterDone.forEach((item) => {
-            item.classList.remove('hide')
-            if (inputSearch.value.length > 0) search()
-        })
-    
-    } else if (statusFilter == 'to-do') {
-        tasksFilterDone.forEach((item) => {
-            item.classList.remove('hide')
-            if (item.classList.contains('done')) {
-                item.classList.add('hide')
-            }
-        })
-        if (inputSearch.value.length > 0) search()
+function search(item) {
+    let nameTask = item.querySelector('.text-task').innerText
+    let nameTaskFormatted = nameTask.toLowerCase()
+    let textComp = inputSearch.value.toLowerCase()
+    let comp = nameTaskFormatted.substring(0, textComp.length)
+    if (!(comp == textComp)) {
+        item.classList.add('hide')
+    } else {
+        item.classList.remove('hide')
     }
 }

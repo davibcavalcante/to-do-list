@@ -33,7 +33,7 @@ section.done {
     background-color: var(--done);
 }
 
-.error-name-exist, .error-create-list, .error-list-exist {
+.error {
     color: var(--error);
     font: lighter 1em var(--main-font);
     

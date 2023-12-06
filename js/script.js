@@ -34,6 +34,9 @@ const cancelAddListButton = document.querySelector('#cancel-list-btn')
 // ERROR
 const errorNameExist = document.querySelector('.error-name-exist')
 const errorListExist = document.querySelector('.error-list-exist')
+const errorCreateList = document.querySelector('.error-create-list')
+const errorNameTaskExist = document.querySelector('.error-name-task-exist')
+const errorNameEmpty = document.querySelector('.error-name-empty')
 
 const lists = JSON.parse(localStorage.getItem('list')) || []
 if (lists.length > 0) {
@@ -59,6 +62,12 @@ cancelAddListButton.addEventListener('click', () => {
 
 confirmAddListButton.addEventListener('click', () => {
     let listName = inputAddList.value
+    if (listName === '') {
+        errorNameEmpty.classList.remove('hide')
+        return
+    } else {
+        errorNameEmpty.classList.add('hide')
+    }
     let nameExist
     if (lists.length > 0) {
         for (let item of lists) {
@@ -72,9 +81,11 @@ confirmAddListButton.addEventListener('click', () => {
             }
         }
         if (!nameExist) {
+            errorCreateList.classList.add('hide')
             createList(listName)
         }
     } else {
+        errorCreateList.classList.add('hide')
         createList(listName)
     }
     inputAddList.value = null
@@ -82,7 +93,7 @@ confirmAddListButton.addEventListener('click', () => {
 })
 
 addTaskButton.addEventListener('click', () => {
-    const errorCreateList = document.querySelector('.error-create-list')
+    let nameTaskExist = false
     if (lists.length == 0) {
         errorCreateList.classList.remove('hide')
     } else {
@@ -90,17 +101,21 @@ addTaskButton.addEventListener('click', () => {
             errorCreateList.classList.add('hide')
             let indexList = lists.findIndex((item) => item.name == selLists.value)
         
-            lists[indexList].done.push(false)
-            lists[indexList].item.push(inputAddTask.value)
-            lists[indexList].hour.push(selAddHour.value)
-            lists[indexList].min.push(selAddMin.value)
-            localStorage.setItem('list', JSON.stringify(lists))
-
-            createTask(lists[indexList])
-            selAddHour.value = '00'
-            selAddMin.value = '00'
-            inputAddTask.value = ''
-            inputAddTask.focus()
+            if (lists[indexList].item.length > 0) {
+                lists[indexList].item.forEach((item) => {
+                    if (item === inputAddTask.value) {
+                        errorNameTaskExist.classList.remove('hide')
+                        nameTaskExist = true
+                    }
+                })
+                
+                if (!nameTaskExist) {
+                    errorNameTaskExist.classList.add('hide')
+                    callCreateTask(indexList)
+                }
+            } else {
+                callCreateTask(indexList)
+            }
         }
     }
 })
@@ -151,6 +166,5 @@ containerLists.addEventListener('click' , (e) => {
     }
 })
 
-inputSearch.addEventListener('input', search)
-
+inputSearch.addEventListener('input', filter)
 selFilter.addEventListener('change', filter)
